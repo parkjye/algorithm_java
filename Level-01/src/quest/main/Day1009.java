@@ -1,14 +1,18 @@
 package quest.main;
 
+import java.util.Scanner;
+
 public class Day1009 {
 	public static void main(String[] args) {
 		
-		int n = 5;
+		Scanner scan = new Scanner(System.in);
+		System.out.println("정수 입력");
+		int n = scan.nextInt();
+		scan.close();
 		
 		if(isValid(n)) {
 			System.out.println(solution(n));
 		}
-		
 	}
 	
 	/* 약수의 합 */
@@ -16,9 +20,7 @@ public class Day1009 {
 		int answer = 0;
         
         for(int i=1; i<=n; i++) {
-	    	if(n%i==0) { 		
-	    		answer += n/i;
-	    	}
+	    	if(n%i==0) answer += i;
         }
 
         return answer;
