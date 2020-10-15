@@ -13,15 +13,11 @@ public class Day1015 {
 	public static long solution(long n) {
         long answer = 0;
         double root = 0;
-        int point = 0;
         
-        //n의 제곱근 구하기
+        //n의 제곱근
         root = (double)Math.sqrt(n);
         
-        //소수점 첫 번째 자리
-        point = (int)(root*10)%10;
-        
-        if(point==0) {
+        if((root*10)%10==0) {
         	answer = (long)Math.pow(root+1, 2);
         }else {
         	answer = -1;
@@ -29,6 +25,27 @@ public class Day1015 {
 
         return answer;
     }
+	
+	/* solution2 
+	public static long solution2(long n) {
+        long answer = 0;
+        double root = 0;
+        int point = 0;
+
+        //n의 제곱근
+        root = (double)Math.sqrt(n);
+
+        //소수점 첫 번째 자리
+        point = (int)(root*10)%10;
+
+        if(point==0) {
+        	answer = (long)Math.pow(root+1, 2);
+        }else {
+        	answer = -1;
+        }
+
+        return answer;
+    }*/
 	
 	public static void main(String[] args) {
 		long n = 121;
