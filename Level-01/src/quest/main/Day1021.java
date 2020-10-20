@@ -18,28 +18,11 @@ public class Day1021 {
 			}
 			j++;
 		}
-
+		
 		answer[0] = list.get(list.size()-1);
 		
-		
-		//최소공배수
-		int lNum = 0;
-		int sNum = 0;
-		
-		if(n>m) {
-			lNum = n;
-			sNum = m;
-		}else {
-			lNum = m;
-			sNum = n;
-		}
-
-		for(int i=1; i<=lNum; i++) {		
-			if((lNum*i) % sNum == 0) {
-				answer[1] = lNum*i;
-				break;
-			}
-		}
+		//최소공배수 == (두 수의 곱/최대공약수)
+		answer[1] = (n*m)/answer[0];
 
         return answer;
     }
