@@ -8,10 +8,10 @@ public class Day1023 {
 		for(int i=0; i<=500; i++) {
 			if(num==1) break;
 			
-			num = (num%2==0) ? num/2 : num*3+1;
-			answer++;
-			
 			if(i==500) answer=-1;
+			
+			num = (0==num%2) ? num/2 : num*3+1;
+			answer++;			
 		}
 
 		return answer;
