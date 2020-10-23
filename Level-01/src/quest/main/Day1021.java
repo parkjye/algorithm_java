@@ -32,13 +32,16 @@ public class Day1021 {
 	public static int[] solution2(int n, int m) {
 		int[] answer = new int[2];
 		
-		while (m > 0) {
-            int temp = m;
-            m = n % m;
-            n = temp;
+        int x = Math.max(n, m);
+        int y = Math.min(n, m);
+		
+		while (y > 0) {
+            int temp = x;
+            x=y;
+            y=temp%y;
         }
 		
-        answer[0] = n;
+        answer[0] = x;
 		
 		//최소공배수
 		answer[1] = (n*m) / answer[0];
@@ -54,8 +57,8 @@ public class Day1021 {
 	}
 	
 	public static void main(String[] args) {
-		int n = 4;
-		int m = 6;
+		int n = 3;
+		int m = 12;
 		
 		if(isValid(n, m)) {
 			System.out.println(Arrays.toString(solution(n, m)));
