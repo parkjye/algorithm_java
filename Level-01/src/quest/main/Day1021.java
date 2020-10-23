@@ -1,6 +1,7 @@
 package quest.main;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Day1021 {
 	
@@ -27,6 +28,24 @@ public class Day1021 {
         return answer;
     }
 	
+	/* 최대공약수 (유클리드 호제법) */
+	public static int[] solution2(int n, int m) {
+		int[] answer = new int[2];
+		
+		while (m > 0) {
+            int temp = m;
+            m = n % m;
+            n = temp;
+        }
+		
+        answer[0] = n;
+		
+		//최소공배수
+		answer[1] = (n*m) / answer[0];
+		
+		return answer;
+	}
+	
 	//condition
 	public static boolean isValid(int n, int m) {
 		boolean flag=false;
@@ -35,11 +54,12 @@ public class Day1021 {
 	}
 	
 	public static void main(String[] args) {
-		int n = 6;
-		int m = 4;
+		int n = 4;
+		int m = 6;
 		
 		if(isValid(n, m)) {
-			solution(n, m);
+			System.out.println(Arrays.toString(solution(n, m)));
+			System.out.println(Arrays.toString(solution2(n, m)));
 		}
 		
 	}
