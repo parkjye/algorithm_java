@@ -1,15 +1,19 @@
 package quest.main;
 
+import java.util.Arrays;
+
 public class Day1029 {
 	
 	/* 예산 */
 	public static int solution(int[] d, int budget) {
 		int answer = 0;
+		
+		Arrays.sort(d);
 
 		for(int i=0; i<d.length; i++) {
 			budget = budget - d[i];
 			
-			if(budget <= 0) break;
+			if(budget < 0) break;
 			answer++;
 		}
 		
@@ -39,8 +43,8 @@ public class Day1029 {
 	}
 	
 	public static void main(String[] args) {
-		int[] d = {1,3,2,5,4};
-		int budget = 9;
+		int[] d = {2,2,3,3};
+		int budget = 10;
 		
 		if(isValidD(d) && isValidBud(budget)) {
 			System.out.println(solution(d, budget));
