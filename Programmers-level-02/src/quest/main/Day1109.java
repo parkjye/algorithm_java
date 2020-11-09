@@ -15,6 +15,7 @@ public class Day1109 {
 			//알파벳 만드는 스틱조작 수
 			if(getAscii <= 13) answer += getByte[i]-65;
 			else answer += 26-(getByte[i]-65);
+			
 		}
 		
 		/*
@@ -32,6 +33,27 @@ public class Day1109 {
 		
 		return answer+move;
 	}
+	
+	public int solution2(String name) {
+		int answer = 0;
+		int len = name.length();
+		int min_move = len-1;
+		
+		for(int i=0; i<len; i++) {
+			answer += Math.min(name.charAt(i)-'A', 'Z'-name.charAt(i)+1);
+			
+			int next = i+1;
+			
+			while(next<len && name.charAt(next)=='A') next++;
+			
+			min_move = Math.min(min_move, i+len-next+i);
+		}
+		
+		answer += min_move;
+		
+		return answer;
+	}
+	
 	
 	/* 제한 사항 */
 	public static boolean isValid(String name) {
@@ -53,6 +75,7 @@ public class Day1109 {
 		
 		if(isValid(name)) {
 			System.out.println(joyStick.solution(name));
+			System.out.println(joyStick.solution2(name));
 		};
 	}
 }
