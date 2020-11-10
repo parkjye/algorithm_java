@@ -1,6 +1,7 @@
 package quest.main;
 
 public class Day1105 {
+	/*큰 수 만들기*/
 	public String solution(String number, int k){
 		StringBuilder answer = new StringBuilder();
 		
