@@ -1,6 +1,6 @@
 package quest.main;
 
-public class Day1120 {
+public class Day1116 {
 	/* 핸드폰 번호 가리기 */
 	public String solution(String phone_number) {
 		String answer="";
@@ -24,9 +24,9 @@ public class Day1120 {
 	}
 	
 	public static void main(String[] args) {
-		String phone_number = "0103334444";
+		String phone_number = "01033334444";
 		
-		Day1120 hideNumber = new Day1120();
+		Day1116 hideNumber = new Day1116();
 		
 		if(isValid(phone_number)) {
 			System.out.println(hideNumber.solution(phone_number));
