@@ -1,6 +1,7 @@
 package quest.main;
 
-public class Day1031_1 {	
+public class Day1031_1 {
+	/* 두 정수 사이의 합 */
 	public static long solution(int a, int b) {
         long answer = 0;
 
