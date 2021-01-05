@@ -1,40 +1,51 @@
 package quest.main;
 
+import java.util.ArrayList;
+
 public class Day0923 {
+	/* 모의고사(수포자들) */
 	public static void main(String[] args) {
-	    int[] answer = {};
-	    
-	    //수포자들
+		//int[] answers = {1, 3, 2, 4, 2};
+		int[] answers = {1, 2, 3, 4, 5};
+		solution(answers);
+    }
+	
+	public static int[] solution(int[] answers) {
 	    int[] m1 = {1, 2, 3, 4, 5};
 	    int[] m2 = {2, 1, 2, 3, 2, 4, 2, 5};
 	    int[] m3 = {3, 3, 1, 1, 2, 2, 4, 4, 5, 5};
 	    
-	    //정답수
-	    int m1Count = 0; 
-	    int m2Count = 0;
-	    int m3Count = 0;
+	    //정답 수를 담을 배열
+	    int[] correct = {0, 0, 0};
 	    
-	    //1등 자리
-	    int maxCnt=0;
-	    
-	    for(int i=0; i<answer.length; i++) {
-		    if(answer[i] == m1[i]) m1Count++;
-		    if(answer[i] == m2[i]) m2Count++;
-		    if(answer[i] == m3[i]) m3Count++;
+	    //수포자들이 답안을 반복하니까 인덱스를 초기화(i % 각 답안의 길이) 한다 
+	    for(int i=0; i<answers.length; i++) {
+		    if(answers[i] == m1[i%5]) correct[0]++;
+		    if(answers[i] == m2[i%8]) correct[1]++;
+		    if(answers[i] == m3[i%10]) correct[2]++;
 	    }
 	    
-	    maxCnt = Math.max(m1Count, Math.max(m2Count, m3Count));
+	    //최고득점을 찾는다.
+	    int maxCorrect = Math.max(correct[0], Math.max(correct[1], correct[2]));
 	    
-	    if(maxCnt==m1Count) {
-	    	System.out.println("가장 문제를 많이 맞힌 사람은 수포자1 입니다.");
-	    }else if(maxCnt==m2Count) {
-	    	System.out.println("가장 문제를 많이 맞힌 사람은 수포자2 입니다.");
-	    }else {
-	    	System.out.println("가장 문제를 많이 맞힌 사람은 수포자3 입니다.");
+	    //최고득점자를 담을 list.
+	    ArrayList<Integer> list = new ArrayList<Integer>();
+	    
+	    /*
+	     * 최고득점을 얻은 수포자를 list에 담아야한다.
+	     * (ex. 수포자1이 고득점자면 list에 1을 넣음)
+	     * 
+	     * 인덱스가 0부터 시작하니까 +1을 해서 수포자 번호를 맞춘다.
+	     * */
+	    for(int i=0; i<correct.length; i++) {    	
+	    	if(maxCorrect == correct[i]) list.add(i+1);
 	    }
+
+	    int[] answer = new int[list.size()];
+
+	    for(int i=0; i<list.size(); i++) answer[i] = list.get(i);
 	    
-	    //맞춘 문제 수 출력
-	    
-    }
+	    return answer;
+	}
 	
-}//Day0923
+}
