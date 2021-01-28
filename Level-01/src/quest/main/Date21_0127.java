@@ -6,7 +6,10 @@ import java.util.Arrays;
 public class Date21_0127 {
 	/* 신규 아이디 추천 */
 	public static void main(String[] args) {
-		String new_id = "... .....aB......@abcdefgefgh.i.jklm2-_.......";
+		String new_id = "........AB......@abcdefgefgh.i.jklm2-_.......";
+		String new_id2 = ".:¥(@(¥:&(&.";
+		String new_id3 = "...!@BaT#*..y.abcdefghijklm";
+		String new_id4 = "=.=";
 		
 		Date21_0127 recommendID = new Date21_0127();
 		System.out.println(recommendID.solution(new_id));
@@ -14,78 +17,57 @@ public class Date21_0127 {
 	
 	public String solution(String new_id) {
 		String answer = "";
-		
-		if(new_id.length() > 1000) {
-			return answer;
-		}else {
-			
-			//1단계. 소문자 치환
-			new_id = new_id.toLowerCase();
-			System.out.println("1단게: "+new_id);
+        
+        //1단계: 소문자 치환
+        new_id = new_id.toLowerCase();
+        
+        //2단계: 소문자, 숫자, -, _, .를 제외한 문자 제거
+        String regularStr = "[^a-z0-9-_.]";
+        new_id = new_id.replaceAll(regularStr, "");
 
-			//2단계. 소문자, 숫자, 빼기(-), 밑줄(_), 마침표(.)를 제외한 모든 문자를 제거
-			String regularStr = "[^-_.0-9a-z]";
-			new_id = new_id.replaceAll(regularStr, "");
-			System.out.println("2단계: "+new_id);
-			
-			//3단계 마침표(.)가 2번 이상 연속된 부분을 하나의 마침표(.)로 치환합니다.
-			//3단계 작업 전 list에 값 add.
-			ArrayList<Character> charList = new ArrayList<>();
-			
-			for(int i=0; i<new_id.length(); i++) {
-				charList.add(new_id.charAt(i));
-			}
-			
-			ArrayList<Character> charListTwo = new ArrayList<>();
-			char tmpChar = 'a';
-			
-			for(Character i : charList) {
-				if(tmpChar == i) continue;
-				else {
-					charListTwo.add(i);
-					tmpChar = i;
-				}
-			}
-			
-			System.out.println("3단계: "+charListTwo+" 사이즈: "+charListTwo.size());
+        //3단계: .가 2번 이상 연속되면 하나로 치환
+        regularStr = "\\.{2,}";
+        new_id = new_id.replaceAll(regularStr, ".");
+        
+        //4단계를 위해서 list에 문자열을 대입
+        ArrayList<Character> charList = new ArrayList<>();
+        
+        for(int i=0; i<new_id.length(); i++) {
+            charList.add(new_id.charAt(i));
+        }
+        
+        //4단계: 마침표(.)가 처음이나 끝에 위치하면 제거        
+        if (charList.size() > 0) {
+            if(charList.get(0) == '.' ) charList.remove(0);
+            if(charList.size() > 0 && '.' == charList.get(charList.size()-1) ) 
+            	charList.remove(charList.size()-1);
+        }
+        
+        //5단계: 빈 문자열이라면 "a"를 대입
+        if(charList.size() == 0) charList.add('a');
 
-			//4단계 new_id에서 마침표(.)가 처음이나 끝에 위치한다면 제거합니다.
-			if(charListTwo.get(0) == '.' ) charListTwo.remove(0);
-			if('.' == charListTwo.get(charListTwo.size()-1) ) charListTwo.remove(charListTwo.size()-1);
-			System.out.println("4단계: "+charListTwo+" 사이즈: "+charListTwo.size());
-
-			
-			//5단계 new_id가 빈 문자열이라면, new_id에 "a"를 대입합니다.
-			if(charListTwo.size() == 0) charListTwo.add('a');
-			System.out.println("5단계: "+charListTwo+" 사이즈: "+charListTwo.size());
-			
-			//6단계 new_id의 길이가 16자 이상이면, new_id의 첫 15개의 문자를 제외한 나머지 문자들을 모두 제거합니다.
-			//만약 제거 후 마침표(.)가 new_id의 끝에 위치한다면 끝에 위치한 마침표(.) 문자를 제거합니다.
-			for(Character i : charListTwo) {
+        //6단계를 위해서 list에 있는 값을 String answer에 대입 
+        for(Character i : charList) {
 				answer += i;
-			}
-			
-			if(answer.length() >= 16) {
-				answer = answer.substring(0, 16);
-				
-				if(answer.charAt(answer.length()-1) == '.') {
-					answer = answer.substring(0, answer.length() - 1);
-				}
-			}
-			
-			System.out.println("6단계: "+answer+" 사이즈: "+answer.length());
-			
-			
-			//7단계 new_id의 길이가 2자 이하라면, 
-			//new_id의 마지막 문자를 new_id의 길이가 3이 될 때까지 반복해서 끝에 붙입니다.
-			if(answer.length() <= 2) {
-				while(answer.length() < 3) {
-					answer += answer.substring(answer.length()-1);
-				}
-			}
-			
 		}
 		
-		return answer;
+        //6단계: 길이가 16자 이상이면, 첫 15개의 문자까지만 남김
+        if(answer.length() >= 16) {
+            answer = answer.substring(0, 15);
+
+            //제거 후 가장 끝에 .가 있으면 제거 
+            if(answer.charAt(answer.length()-1) == '.') {
+                answer = answer.substring(0, answer.length() - 1);
+            }
+        }
+
+        //7단계: 길이가 2자 이하라면, 길이가 3이 될 때까지 마지막 문자를 반복해서 붙힘
+        if(answer.length() <= 2) {
+            while(answer.length() < 3) {
+                answer += answer.substring(answer.length()-1);
+            }
+        }
+        
+        return answer;
 	}
 }
