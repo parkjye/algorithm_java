@@ -12,21 +12,21 @@ public class Date21_0129 {
 	public int solution(int[] nums) {
 		int answer = -1;
 		
-		if(nums.length <= 2) {
+		if(nums.length < 3) {
 			return answer;
 		}else {
-			
-			int getSum = 0;
-			
+			answer=0;
+
+			int getSum = 0;			
 			for(int i=0; i<nums.length; i++) {
 				for(int j=i+1; j<nums.length; j++) {
 					for(int k=j+1; k<nums.length; k++) {
 						
 						getSum = nums[i]+nums[j]+nums[k];
-						if(!isPrime(getSum)) answer++;
+						if(isPrime(getSum)) answer++;
 					}
 				}
-			}		
+			}
 		}
 		
 		return answer;
