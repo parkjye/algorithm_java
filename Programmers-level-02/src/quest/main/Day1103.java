@@ -21,11 +21,14 @@ public class Day1103 {
 				
 			}else if(getBridgeWe > weight){
 				//다리 무게가 초과되면
-					
+				queue.add(0);
+				answer++;
+				
 			}else {
 				queue.add(truck_weights[i]);
 				getBridgeWe += truck_weights[i];
 				answer++;
+				
 			}
 		}
 
