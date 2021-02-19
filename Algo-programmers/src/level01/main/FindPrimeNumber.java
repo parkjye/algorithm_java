@@ -1,4 +1,4 @@
-package level02.main;
+package level01.main;
 
 public class FindPrimeNumber {
 	/* 소수찾기 */
