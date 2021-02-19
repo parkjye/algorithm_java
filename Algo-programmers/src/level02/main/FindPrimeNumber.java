@@ -7,6 +7,7 @@ public class FindPrimeNumber {
 		
 		int n = 10;
 		System.out.println(prime.solution(n));
+		System.out.println(prime.solution2(n));
 	}
 
 	/* 에라토스테네스의 체 */
@@ -26,6 +27,27 @@ public class FindPrimeNumber {
 		for(int i=0; i<numbers.length; i++) {
 			
 			if(numbers[i] != 0) answer++;
+		}
+		
+		return answer;
+	}
+	
+	public int solution2 (int n) {
+		int answer = 0;
+		boolean flag = true;
+		
+		for(int i=2; i<=n; i++) {
+			
+			for(int j=2; j<i; j++) {
+				if(i%j == 0) {
+					flag = false;
+					break;
+				}
+			}
+			
+			if(flag == true) answer++;
+			
+			flag = true;
 		}
 		
 		return answer;
